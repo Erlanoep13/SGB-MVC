@@ -73,10 +73,11 @@ Ao iniciar o sistema, o usuário verá a tela de seleção de perfil com duas op
 - Rafael - Matrícula: 1 - Curso: ADS
 - Erlano - Matrícula: 2 - Curso: ADS
 - Celso - Matrícula: 3 - Curso: ADS
+- Davi - Matrícula: 4 - Curso: ADS
 
 ## Livros:
-- O pequeno príncipe - Autor: Antoine de Saint-Exupéry - Ano de publicação: 1943 - Quantidade disponível: 1
-- Divina comédia - Autor: Dante Allighiere - Ano de publicação: 1304 - Quantidade disponível: 9
+- O pequeno príncipe - ISBN: 1 - Autor: Antoine de Saint-Exupéry - Ano de publicação: 1943 - Quantidade disponível: 1
+- Divina comédia - ISBN: 2 - Autor: Dante Allighiere - Ano de publicação: 1304 - Quantidade disponível: 9
 
 ## Empréstimos:
 - Celso - Divina Comédia
