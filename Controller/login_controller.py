@@ -2,7 +2,7 @@ from Model import usuario_model
 
 # Login do administrador com senha fixa
 def validar_login_admin(nome_digitado, senha_digitada):
-    senha_correta = "123"  # Senha fixa, como no projeto monolítico
+    senha_correta = "123"  # Senha fixa
 
     if senha_digitada == senha_correta:
         return True

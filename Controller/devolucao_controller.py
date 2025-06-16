@@ -1,24 +1,22 @@
 from Model import emprestimo_model, livro_model
 
-def realizar_devolucao(emprestimo_id):
-    # Primeiro, buscar os dados do empréstimo
-    emprestimos_ativos = emprestimo_model.listar_emprestimos_ativos()
+def realizar_devolucao(matricula, isbn):
+    # Busca todos os empréstimos ativos do usuário
+    emprestimos_ativos = emprestimo_model.listar_emprestimos_ativos_por_usuario(matricula)
 
-    emprestimo = next((e for e in emprestimos_ativos if e[0] == emprestimo_id), None)
-    if not emprestimo:
-        print("Empréstimo não encontrado ou já devolvido.")
-        return False
+    # Filtra o empréstimo ativo desse livro específico
+    emprestimo_encontrado = next((e for e in emprestimos_ativos if e[1] == isbn), None)  # e[1] = livro_id (ISBN)
 
-    livro_id = emprestimo[1]  # Coluna 1 é o livro_id
+    if not emprestimo_encontrado:
+        return False  # Nenhum empréstimo ativo desse livro para esse usuário
 
-    # Registrar devolução (a model já atualiza o status e a data de devolução)
-    emprestimo_model.registrar_devolucao(emprestimo_id)
+    emprestimo_id = emprestimo_encontrado[0]  # Coluna 0 = ID do empréstimo
+    sucesso = emprestimo_model.registrar_devolucao(emprestimo_id)
 
-    # Atualizar quantidade de exemplares disponíveis
-    livro = livro_model.buscar_livro_por_isbn(livro_id)
-    if livro:
-        nova_quantidade = livro[4] + 1  # Posição 4 = quantidade_disponivel
-        livro_model.atualizar_quantidade(livro_id, nova_quantidade)
+    if sucesso:
+        livro = livro_model.buscar_livro_por_isbn(isbn)
+        if livro:
+            nova_quantidade = livro[4] + 1  # Posição 4 = quantidade disponível
+            livro_model.atualizar_quantidade(isbn, nova_quantidade)
 
-    print("Devolução realizada com sucesso.")
-    return True
+    return sucesso
