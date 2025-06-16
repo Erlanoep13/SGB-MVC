@@ -67,7 +67,7 @@ Ao iniciar o sistema, o usuário verá a tela de seleção de perfil com duas op
 - Usuários com devoluções atrasadas
 
 
-### Informações já inseridas no banco de dados
+# Informações já inseridas no banco de dados
 
 ## Alunos:
 - Rafael - Matrícula: 1 - Curso: ADS
