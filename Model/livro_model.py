@@ -1,6 +1,5 @@
 from Model.conexao import conectar
 
-# Função para inserir um novo livro
 def inserir_livro(isbn, titulo, autor, ano_publicacao, quantidade_disponivel):
     conexao = conectar()
     cursor = conexao.cursor()
@@ -10,9 +9,10 @@ def inserir_livro(isbn, titulo, autor, ano_publicacao, quantidade_disponivel):
             VALUES (?, ?, ?, ?, ?)
         """, (isbn, titulo, autor, ano_publicacao, quantidade_disponivel))
         conexao.commit()
-        print("Livro cadastrado com sucesso.")
+        return True  # Se der tudo certo
     except Exception as e:
-        print(f"Erro ao cadastrar livro: {e}")
+        print(f"Erro ao inserir livro: {e}")
+        return False  # Se der algum erro (ex: ISBN duplicado)
     finally:
         conexao.close()
 

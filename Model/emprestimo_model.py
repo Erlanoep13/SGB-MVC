@@ -46,16 +46,13 @@ def registrar_devolucao(emprestimo_id):
         resultado = cursor.fetchone()
         if not resultado:
             print("Empréstimo não encontrado.")
-            return
+            return False  # Retorno explícito em caso de erro
 
         data_prevista = datetime.strptime(resultado[0], "%Y-%m-%d").date()
         data_devolucao = datetime.now().date()
 
         # Determina o status final
-        if data_devolucao > data_prevista:
-            status_final = 'atrasado'
-        else:
-            status_final = 'devolvido'
+        status_final = 'atrasado' if data_devolucao > data_prevista else 'devolvido'
 
         cursor.execute("""
             UPDATE emprestimos
@@ -65,8 +62,10 @@ def registrar_devolucao(emprestimo_id):
 
         conexao.commit()
         print(f"Devolução registrada. Status: {status_final}")
+        return True
     except Exception as e:
         print(f"Erro ao registrar devolução: {e}")
+        return False
     finally:
         conexao.close()
 
